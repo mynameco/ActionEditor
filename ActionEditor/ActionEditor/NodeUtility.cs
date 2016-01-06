@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ActionEditor
 {
@@ -19,6 +20,17 @@ namespace ActionEditor
 		public static void AddInputSignal(this OutputSignal outputSignal, InputSignal inputSignal)
 		{
 			ArrayUtility.AddItem(ref outputSignal.InputSignals, inputSignal);
+		}
+
+		public static void Connect(this Node outputNode, Node inputNode, string outputName, string inputName)
+		{
+			var output = outputNode.OutputSignals.FirstOrDefault(o => o.Name == outputName);
+			if (output != null)
+			{
+				var input = inputNode.InputSignals.FirstOrDefault(o => o.Name == inputName);
+				if (input != null)
+					output.AddInputSignal(input);
+			}
 		}
 	}
 }

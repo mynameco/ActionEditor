@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using ActionEditor;
 
 namespace ActionEditor
 {
@@ -8,19 +7,24 @@ namespace ActionEditor
 	{
 		static void Main(string[] args)
 		{
-			var node1 = new CustomNode();
-			var inputSignal1 = new InputSignal() { Name = "Input1", Owner = node1, Action = () => { Console.WriteLine("Input1"); } };
-			node1.InputSignals = new InputSignal[] { inputSignal1 };
+			var inputSignalNode = new InputSignalNode();
+			inputSignalNode.Name = "Input";
 
-			var node2 = new InputSignalNode();
-			node2.Name = "Input1";
-			node2.OutputSignals.First().AddInputSignal(inputSignal1);
+			var outputSignalNode = new OutputSignalNode();
+			outputSignalNode.Name = "Output";
 
-			//node2.Signals.First().Slots.Send();
+			var custom1Node = new Custom1Node();
+
+			inputSignalNode.Connect(custom1Node, inputSignalNode.OutputSignal.Name, "Input");
+			custom1Node.Connect(outputSignalNode, "Output", outputSignalNode.InputSignal.Name);
 
 			var rootNode = new CompositeNode();
-			rootNode.Nodes = new Node[] { node1, node2 };
+			rootNode.Nodes = new Node[] { outputSignalNode, inputSignalNode };
 			rootNode.Invalidate();
+
+			var rootOutputSignal = rootNode.OutputSignals.FirstOrDefault();
+			if (rootOutputSignal != null)
+				ArrayUtility.AddItem(ref rootOutputSignal.InputSignals, new InputSignal() { Action = () => { Console.WriteLine("Signal"); } });
 
 			var rootInputSignal = rootNode.InputSignals.FirstOrDefault();
 			rootInputSignal.Send();
