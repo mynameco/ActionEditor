@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActionEditor2
+namespace ActionEditor
 {
 	public static class ArrayUtility
 	{
@@ -9,6 +9,7 @@ namespace ActionEditor2
 			var array2 = new T[array.Length + 1];
 			Array.Copy(array, array2, array.Length);
 			array2[array.Length] = item;
+			array = array2;
         }
 	}
 }

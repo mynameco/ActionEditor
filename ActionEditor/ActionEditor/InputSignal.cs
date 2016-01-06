@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActionEditor2
+namespace ActionEditor
 {
 	public class InputSignal
 	{
