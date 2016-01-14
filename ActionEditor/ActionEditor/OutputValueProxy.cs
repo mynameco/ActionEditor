@@ -16,8 +16,8 @@ namespace ActionEditor
 
 		public object Value
 		{
-			get { return value.InputValues.GetValue<object>(); }
-			set { this.value.InputValues.SetValue<object>(value); }
+			get { return value.InputValues.GetValue(value.Type); }
+			set { this.value.InputValues.SetValue(value, this.value.Type); }
 		}
 
 		private OutputValue value;

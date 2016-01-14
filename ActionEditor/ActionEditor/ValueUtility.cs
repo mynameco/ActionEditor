@@ -5,6 +5,21 @@ namespace ActionEditor
 {
 	public static class ValueUtility
 	{
+		public static object GetValue(this InputValue[] inputValues, Type type)
+		{
+			foreach (var inputValue in inputValues)
+				return inputValue.GetValue(type);
+			return null;
+		}
+
+		public static object GetValue(this InputValue inputValue, Type type)
+		{
+			if (inputValue == null || inputValue.Value == null || inputValue.Value.Type != type)
+				return null;
+
+			return inputValue.Value.Value;
+		}
+
 		public static T GetValue<T>(this InputValue[] inputValues)
 		{
 			foreach (var inputValue in inputValues)
@@ -25,6 +40,20 @@ namespace ActionEditor
 			{
 			}
 			return default(T);
+		}
+
+		public static void SetValue(this InputValue[] inputValues, object value, Type type)
+		{
+			foreach (var inputValue in inputValues)
+				inputValue.SetValue(value, type);
+		}
+
+		public static void SetValue(this InputValue inputValue, object value, Type type)
+		{
+			if (inputValue == null || inputValue.Value == null || inputValue.Value.Type != type)
+				return;
+
+			inputValue.Value.Value = value;
 		}
 
 		public static void SetValue<T>(this InputValue[] inputValues, T value)
