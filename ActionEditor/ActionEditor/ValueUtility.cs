@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace ActionEditor
 {
@@ -16,11 +17,14 @@ namespace ActionEditor
 			if (inputValue == null || inputValue.Value == null || inputValue.Value.Type != typeof(T))
 				return default(T);
 
-			var valueT = inputValue.Value as IValue<T>;
-			if (valueT == null)
-				return default(T);
-
-			return valueT.Value;
+			try
+			{
+				return (T)inputValue.Value.Value;
+			}
+			catch (Exception)
+			{
+			}
+			return default(T);
 		}
 
 		public static void SetValue<T>(this InputValue[] inputValues, T value)
@@ -34,11 +38,7 @@ namespace ActionEditor
 			if (inputValue == null || inputValue.Value == null || inputValue.Value.Type != typeof(T))
 				return;
 
-			var valueT = inputValue.Value as IValue<T>;
-			if (valueT == null)
-				return;
-
-			valueT.Value = value;
+			inputValue.Value.Value = value;
 		}
 
 		public static void AddInputValue(this OutputValue outputValue, InputValue inputValue)

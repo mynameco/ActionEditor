@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ActionEditor
 {
@@ -10,6 +11,8 @@ namespace ActionEditor
 		{
 			InputSignals = new InputSignal[0];
 			OutputSignals = new OutputSignal[0];
+			InputValues = new InputValue[0];
+			OutputValues = new OutputValue[0];
 
 			foreach (var node in Nodes)
 			{
@@ -27,6 +30,23 @@ namespace ActionEditor
 					var outputSignal = new OutputSignal() { Name = outputSignalNode.Name };
 					ArrayUtility.AddItem(ref OutputSignals, outputSignal);
 					outputSignalNode.InputSignal.Action = () => { outputSignal.InputSignals.Send(); };
+					continue;
+				}
+
+				var inputValueNode = node as InputValueNode;
+				if (inputValueNode != null)
+				{
+					var inputValue = new InputValue() { Name = inputValueNode.Name, Owner = this, Value = new OutputValueProxy(inputValueNode.OutputValue) };
+					ArrayUtility.AddItem(ref InputValues, inputValue);
+					continue;
+				}
+
+				var outputValueNode = node as OutputValueNode;
+				if (outputValueNode != null)
+				{
+					var outputValue = new OutputValue() { Name = outputValueNode.Name, Type = outputValueNode.Type };
+					ArrayUtility.AddItem(ref OutputValues, outputValue);
+					outputValueNode.InputValue.Value = new OutputValueProxy(outputValue);
 					continue;
 				}
 			}

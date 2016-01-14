@@ -44,14 +44,17 @@
     <Compile Include="InputSignal.cs" />
     <Compile Include="InputSignalNode.cs" />
     <Compile Include="InputValue.cs" />
+    <Compile Include="InputValueNode.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="Node.cs" />
+    <Compile Include="OutputValueNode.cs" />
     <Compile Include="SignalUtility.cs" />
     <Compile Include="OutputSignal.cs" />
     <Compile Include="OutputSignalNode.cs" />
     <Compile Include="OutputValue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OutputValueProxy.cs" />
     <Compile Include="ValueUtility.cs" />
   </ItemGroup>
   <ItemGroup>
