@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace ActionEditor
 {
-	public static class NodeUtility
+	public static class SignalUtility
 	{
 		public static void Send(this InputSignal[] inputSignals)
 		{
@@ -22,7 +21,7 @@ namespace ActionEditor
 			ArrayUtility.AddItem(ref outputSignal.InputSignals, inputSignal);
 		}
 
-		public static void Connect(this Node outputNode, Node inputNode, string outputName, string inputName)
+		public static void ConnectSignal(this Node outputNode, Node inputNode, string outputName, string inputName)
 		{
 			var output = outputNode.OutputSignals.FirstOrDefault(o => o.Name == outputName);
 			if (output != null)

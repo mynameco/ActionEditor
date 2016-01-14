@@ -15,8 +15,8 @@ namespace ActionEditor
 
 			var custom1Node = new Custom1Node();
 
-			inputSignalNode.Connect(custom1Node, inputSignalNode.OutputSignal.Name, "Input");
-			custom1Node.Connect(outputSignalNode, "Output", outputSignalNode.InputSignal.Name);
+			inputSignalNode.ConnectSignal(custom1Node, inputSignalNode.OutputSignal.Name, "Input");
+			custom1Node.ConnectSignal(outputSignalNode, "Output", outputSignalNode.InputSignal.Name);
 
 			var rootNode = new CompositeNode();
 			rootNode.Nodes = new Node[] { outputSignalNode, inputSignalNode };
