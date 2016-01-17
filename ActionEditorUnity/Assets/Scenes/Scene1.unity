@@ -259,11 +259,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   store:
-    objects: []
-    ints: 
-    floats: []
-    strings: []
-    vectors3: []
+    Nodes:
+    - Type: CompositeNode
+      Position: {x: 64, y: 52}
+      Signals: []
+      Values: []
+    - Type: CompositeNode
+      Position: {x: 381, y: 218}
+      Signals: []
+      Values: []
 --- !u!4 &2066843123
 Transform:
   m_ObjectHideFlags: 0

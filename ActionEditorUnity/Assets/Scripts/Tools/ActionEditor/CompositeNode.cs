@@ -20,7 +20,7 @@ namespace ActionEditor
 				if (inputSignalNode != null)
 				{
 					var inputSignal = new InputSignal() { Name = inputSignalNode.Name, Owner = this, Action = () => { inputSignalNode.OutputSignal.InputSignals.Send(); } };
-					ArrayUtility.AddItem(ref InputSignals, inputSignal);
+					ArrayUtility.Add(ref InputSignals, inputSignal);
 					continue;
 				}
 
@@ -28,7 +28,7 @@ namespace ActionEditor
 				if (outputSignalNode != null)
 				{
 					var outputSignal = new OutputSignal() { Name = outputSignalNode.Name };
-					ArrayUtility.AddItem(ref OutputSignals, outputSignal);
+					ArrayUtility.Add(ref OutputSignals, outputSignal);
 					outputSignalNode.InputSignal.Action = () => { outputSignal.InputSignals.Send(); };
 					continue;
 				}
@@ -37,7 +37,7 @@ namespace ActionEditor
 				if (inputValueNode != null)
 				{
 					var inputValue = new InputValue() { Name = inputValueNode.Name, Owner = this, Value = new OutputValueProxy(inputValueNode.OutputValue) };
-					ArrayUtility.AddItem(ref InputValues, inputValue);
+					ArrayUtility.Add(ref InputValues, inputValue);
 					continue;
 				}
 
@@ -45,7 +45,7 @@ namespace ActionEditor
 				if (outputValueNode != null)
 				{
 					var outputValue = new OutputValue() { Name = outputValueNode.Name, Type = outputValueNode.Type };
-					ArrayUtility.AddItem(ref OutputValues, outputValue);
+					ArrayUtility.Add(ref OutputValues, outputValue);
 					outputValueNode.InputValue.Value = new OutputValueProxy(outputValue);
 					continue;
 				}

@@ -18,7 +18,7 @@ namespace ActionEditor
 
 		public static void AddInputSignal(this OutputSignal outputSignal, InputSignal inputSignal)
 		{
-			ArrayUtility.AddItem(ref outputSignal.InputSignals, inputSignal);
+			ArrayUtility.Add(ref outputSignal.InputSignals, inputSignal);
 		}
 
 		public static void ConnectSignal(this Node outputNode, Node inputNode, string outputName, string inputName)

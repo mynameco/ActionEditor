@@ -72,7 +72,7 @@ namespace ActionEditor
 
 		public static void AddInputValue(this OutputValue outputValue, InputValue inputValue)
 		{
-			ArrayUtility.AddItem(ref outputValue.InputValues, inputValue);
+			ArrayUtility.Add(ref outputValue.InputValues, inputValue);
 		}
 
 		public static void ConnectValue(this Node outputNode, Node inputNode, string outputName, string inputName)

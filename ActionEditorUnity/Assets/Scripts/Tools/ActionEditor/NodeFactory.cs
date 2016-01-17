@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using UnityEngine;
 
 namespace ActionEditor
 {
@@ -16,9 +17,15 @@ namespace ActionEditor
 				if (!typeof(Node).IsAssignableFrom(type))
 					continue;
 
+				// Какие то проблемы с захватом
+				var nodeType = type;
+
 				var method = new Func<Node>(() =>
 				{
-					var item = (Node)Activator.CreateInstance(type);
+					//Debug.Log("Create node : " + nodeType.Name);
+
+					var instance = Activator.CreateInstance(nodeType);
+					var item = (Node)instance;
 					return item;
 				});
 
@@ -40,6 +47,18 @@ namespace ActionEditor
 			}
 
 			return func();
+		}
+
+		public static IEnumerable<string> Types
+		{
+			get
+			{
+				lock (factories)
+				{
+					var list = new List<string>(factories.Keys);
+					return list;
+				}
+			}
 		}
 
 		private static Dictionary<string, Func<Node>> factories = new Dictionary<string, Func<Node>>();
